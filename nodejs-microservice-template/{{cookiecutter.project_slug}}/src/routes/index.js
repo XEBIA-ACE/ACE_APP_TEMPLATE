@@ -1,0 +1,8 @@
+const express = require('express');
+const router = express.Router();
+const sampleController = require('../controllers/sampleController');
+
+router.get('/health', (req, res) => res.json({ status: 'ok' }));
+router.get('/sample', sampleController.getSample);
+
+module.exports = router; 

@@ -1,0 +1,21 @@
+{
+  "name": "{{ cookiecutter.project_slug }}",
+  "version": "1.0.0",
+  "description": "{{ cookiecutter.project_name }}",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "author": "{{ cookiecutter.author_name }} <{{ cookiecutter.author_email }}>",
+  "license": "{{ cookiecutter.license }}",
+  "dependencies": {
+    "express": "{{ cookiecutter.express_version }}",
+    "mongoose": "^7.0.0",
+    "redis": "^4.0.0",
+    "dotenv": "^16.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  }
+} 

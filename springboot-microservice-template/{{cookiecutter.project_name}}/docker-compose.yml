@@ -1,0 +1,89 @@
+{% if cookiecutter.include_docker == "yes" -%}
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      {% if cookiecutter.database_type == "postgresql" -%}
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/{{ cookiecutter.project_slug.replace('-', '_') }}
+      {%- elif cookiecutter.database_type == "mysql" -%}
+      - DB_USERNAME=root
+      - DB_PASSWORD=password
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/{{ cookiecutter.project_slug.replace('-', '_') }}
+      {%- endif %}
+      {% if cookiecutter.include_cache == "redis" -%}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      {%- endif %}
+    depends_on:
+      {% if cookiecutter.database_type != "h2" -%}
+      - db
+      {%- endif %}
+      {% if cookiecutter.include_cache == "redis" -%}
+      - redis
+      {%- endif %}
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - app-network
+
+  {% if cookiecutter.database_type == "postgresql" -%}
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: {{ cookiecutter.project_slug.replace('-', '_') }}
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+  {%- elif cookiecutter.database_type == "mysql" -%}
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: {{ cookiecutter.project_slug.replace('-', '_') }}
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - app-network
+  {%- endif %}
+
+  {% if cookiecutter.include_cache == "redis" -%}
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - app-network
+  {%- endif %}
+
+volumes:
+  {% if cookiecutter.database_type == "postgresql" -%}
+  postgres_data:
+  {%- elif cookiecutter.database_type == "mysql" -%}
+  mysql_data:
+  {%- endif %}
+  {% if cookiecutter.include_cache == "redis" -%}
+  redis_data:
+  {%- endif %}
+
+networks:
+  app-network:
+    driver: bridge
+{%- else -%}
+# Docker Compose is not included in this template
+{%- endif %}
