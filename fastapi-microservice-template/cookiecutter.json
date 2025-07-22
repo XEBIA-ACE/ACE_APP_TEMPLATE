@@ -1,0 +1,37 @@
+{
+  "_copy_without_render": ["*.db"],
+  "project_name": "Sample FastAPI Microservice",
+  "project_slug": "sample-fastapi-microservice",
+  "author_name": "Xebia ACE",
+  "author_email": "ace@xebia.com",
+  "project_description": "A robust Flask API project with best practices",
+  "app_name": "app",
+  "module_name": "{{ cookiecutter.app_name.lower().replace(' ', '_').replace('-', '_') }}",
+  "version": "0.1.0",
+  "python_version": ["3.10", "3.11", "3.12"],
+  "license": ["MIT", "Apache-2.0", "GPL-3.0", "None"],
+
+  "database": ["postgresql", "sqlite", "mysql"],
+  "use_alembic": "True",
+  "use_sqlalchemy": "True",
+  "use_marshmallow": "True",
+
+  "authentication_method": ["jwt", "session_based", "none"],
+  "include_swagger_ui": "True",
+
+  "logging_level": ["INFO", "DEBUG", "WARNING", "ERROR"],
+
+  "use_docker": "True",
+  "include_docker_compose": "True",
+  "use_pytest": "True",
+  "use_black": "True",
+  "use_isort": "True",
+  "use_flake8": "True",
+
+  "include_github_actions": ["yes", "no"],
+  "include_code_of_conduct": ["yes", "no"],
+  "include_contributing": ["yes", "no"],
+
+  "create_virtualenv_on_init": "True",
+  "install_dependencies_on_init": "True"
+}
