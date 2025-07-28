@@ -23,8 +23,8 @@
   "mongodb_uri": "mongodb://localhost:27017/{{ cookiecutter.project_slug }}",
   "use_redis": "y",
   "redis_uri": "redis://localhost:6379",
-  "redis_host": "localhost", {# <--- ADDED THIS LINE #}
-  "redis_port": "6379", {# <--- ADDED THIS LINE #}
+  "redis_host": "localhost", 
+  "redis_port": "6379",
 
   "authentication_method": ["jwt", "session_based", "none"],
   "include_swagger_ui": "y",
