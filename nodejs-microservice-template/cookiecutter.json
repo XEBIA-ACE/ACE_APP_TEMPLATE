@@ -1,5 +1,5 @@
 {
-  "_copy_without_render": [".db", "*.db", "*.sqlite"], {# <-- Removed .env from here #}
+  "_copy_without_render": [".db", "*.db", "*.sqlite"], 
   "_output_dir": ".",
   "_template": ".",
 
