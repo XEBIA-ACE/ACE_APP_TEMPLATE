@@ -1,5 +1,5 @@
 {
-  "_copy_without_render": [".db", "*.db", "*.sqlite", ".env"],
+  "_copy_without_render": [".db", "*.db", "*.sqlite"], {# <-- Removed .env from here #}
   "_output_dir": ".",
   "_template": ".",
 
@@ -15,11 +15,14 @@
   "node_version": ["20", "18", "16"],
   "express_version": "^4.18.2",
   "license": ["MIT", "Apache-2.0", "GPL-3.0", "None"],
+
   "default_port": "3000",
 
   "database": ["postgresql", "sqlite", "mysql", "none"],
   "use_mongoose": "y",
+  "mongodb_uri": "mongodb://localhost:27017/{{ cookiecutter.project_slug }}",
   "use_redis": "y",
+  "redis_uri": "redis://localhost:6379",
 
   "authentication_method": ["jwt", "session_based", "none"],
   "include_swagger_ui": "y",
