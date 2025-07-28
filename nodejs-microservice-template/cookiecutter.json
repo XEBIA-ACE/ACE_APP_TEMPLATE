@@ -1,13 +1,44 @@
 {
-  "project_name": "Sample Node Microservice",
-  "project_slug": "sample-node-microservice",
+  "_copy_without_render": [".db", "*.db", "*.sqlite", ".env"],
+  "_output_dir": ".",
+  "_template": ".",
+
+  "project_name": "My New FastAPI Service",
+  "project_slug": "{{ cookiecutter.project_name | lower | replace(' ', '-') | replace('_', '-') }}",
+  "project_short_description": "A robust FastAPI project with best practices.",
   "author_name": "Xebia ACE",
   "author_email": "ace@xebia.com",
-  "node_version": "20",
-  "express_version": "4.18.2",
-  "mongodb_uri": "mongodb://localhost:27017/sampledb",
-  "redis_host": "localhost",
-  "redis_port": "6379",
-  "default_port": "3000",
-  "license": ["MIT", "Apache-2.0", "GPL-3.0", "None"]
-} 
+  "repository_name": "{{ cookiecutter.project_slug }}",
+  "app_name": "app",
+  "module_name": "{{ cookiecutter.app_name | lower | replace(' ', '_') | replace('-', '_') }}",
+  "version": "0.1.0",
+  "python_version": ["3.12", "3.11", "3.10"],
+  "license": ["MIT", "Apache-2.0", "GPL-3.0", "None"],
+
+  "database": ["postgresql", "sqlite", "mysql", "none"],
+  "use_alembic": "y",
+  "use_sqlalchemy": "y",
+  "use_pydantic_settings": "y",
+
+  "authentication_method": ["jwt", "session_based", "none"],
+  "include_swagger_ui": "y",
+
+  "logging_level": ["INFO", "DEBUG", "WARNING", "ERROR"],
+
+  "use_docker": "y",
+  "include_docker_compose": "y",
+  "use_pytest": "y",
+  "use_black": "y",
+  "use_isort": "y",
+  "use_flake8": "y",
+  "use_ruff": "n",
+
+  "include_github_actions": "y",
+  "include_code_of_conduct": "n",
+  "include_contributing": "y",
+  "include_security_md": "y",
+
+  "create_virtualenv_on_init": "y",
+  "install_dependencies_on_init": "y",
+  "run_pre_commit_on_init": "y"
+}
